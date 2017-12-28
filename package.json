@@ -1,0 +1,7 @@
+{
+  "name": "Postgres",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "BaconDev <kelvinmunene22@gmail.com>",
+  "license": "MIT"
+}

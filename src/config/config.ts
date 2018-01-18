@@ -104,6 +104,11 @@ const initGlobalConfigFiles = (config, assets) => {
   // Setting Globbed policies files
   config.files.server.policies = getGlobbedPaths(assets.server.policies);
 
+  config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['public/']));
+
+  // Setting Globbed css files
+  config.files.client.css = getGlobbedPaths(assets.client.lib.css, 'public/').concat(getGlobbedPaths(assets.client.css, ['public/']));
+
   // Setting non Js files
   config.files.server.nonJs = getGlobbedPaths(assets.server.nonJs);
 

@@ -62,7 +62,7 @@ const envVarsSchema = Joi.object({
   POSTGRES_DB_NAME: Joi.string().default('postgres'),
   POSTGRES_DB_USER: Joi.string().default('postgres'),
   POSTGRES_DB_PASSWORD : Joi.string().default('xtrace'),
-  POSTGRES_DB_DIALECT: Joi.string().default('postgres')
+  POSTGRES_DB_DIALECT: Joi.string().default('postgres'),
 }).unknown()
   .required();
 

@@ -5,16 +5,19 @@ export default {
       js: [],
       tests: []
     },
-    css: [],
+    css: ['modules/*/client/**/*.css'],
     less: [],
     sass: [],
-    js: [],
+    js: [
+      'modules/*/client/*.js',
+      'modules/*/client/**/*.js'
+    ],
     img: [],
-    views: [],
+    views: ['modules/*/client/**/views/**/*.html'],
     templates: []
   },
   server: {
-    gulpConfig: ['gulpfile.babel'],
+    gulpConfig: ['Gulpfile.ts'],
     allJs: ['server.js', 'config/**/*.js', 'modules/*/server/**/*.js'],
     nonJs: ['./package.json', './.gitignore', './.env'],
     sequelizeModels: 'modules/*/server/models/sequelize/**/*.js',

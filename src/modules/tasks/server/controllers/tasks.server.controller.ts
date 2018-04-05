@@ -5,7 +5,7 @@ function getAllTasks(req, res){
   orm.Task.findAll().then((tasks) => {
     res.status(200).send(tasks);
   }).catch((err) => {
-    res.status(500).send(error);
+    res.status(500).send(err);
   });
 }
 

@@ -1,5 +1,5 @@
 export = (sequelize, DataTypes) => {
-  const Vendor = sequelize.define('Comment', {
+  const Vendor = sequelize.define('Vendor', {
     businessName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -10,16 +10,16 @@ export = (sequelize, DataTypes) => {
       allowNull: true,
       comment: 'Website url'
     },
-    photos: {
-      type: DataTypes.ARRAY,
-      allowNull: true,
-      comment: 'Vendors photos'
-    },
-    videos: {
-      type: DataTypes.ARRAY,
-      allowNull: true,
-      comment: 'Vendor videos'
-    },
+    // photos: {
+    //   type: DataTypes.ARRAY,
+    //   allowNull: true,
+    //   comment: 'Vendors photos'
+    // },
+    // videos: {
+    //   type: DataTypes.ARRAY,
+    //   allowNull: true,
+    //   comment: 'Vendor videos'
+    // },
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -34,15 +34,8 @@ export = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
       comment: 'Vendor description'
-    },
-    /*user: {
-       type: DataTypes.INTEGER,
-       references: {
-         model: User,
-         key: 'id',
-         deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-       }
-    }*/
+    }
   });
+
   return Vendor;
 }

@@ -6,20 +6,21 @@ import config from '../../../../../config/config';
 
 owasp.config(config.shared.owasp);
 
-const validateLocalStrategyProperty = function validateLocalStrategyProperty(property){
+const validateLocalStrategyProperty = function validateLocalStrategyProperty(property:any){
   return ((this.provider != 'local' && !this.updated) || property.length);
 };
 
-const validateLocalStrategyEmail = function validateLocalStrategyEmail(email) {
+const validateLocalStrategyEmail = function validateLocalStrategyEmail(email:string) {
  return ((this.provider !== 'local' && !this.updated) || sequelize.Validator.isEmail(email, { require_tld: false }));
 };
 
-const validateUsername = function validateUsername(username){
+const validateUsername = function validateUsername(username:string){
   const usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
   return (this.provider != 'local' || ( username && usernameRegex.test(username) && config.illegalUsernames.indexOf(username) < 0 ));
 };
 
-export = (sequelize, DataTypes) => {
+export = (sequelize:object, DataTypes:object) => {
+  console.log(DataTypes);
   const User = sequelize.define('User', {
     firstName: {
       type: DataTypes.STRING,
@@ -108,7 +109,7 @@ export = (sequelize, DataTypes) => {
     }
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: function(models:any) {
         User.belongsTo(models.Task, {
           onDelete: 'CASCADE',
           foreignKey: {
@@ -118,13 +119,13 @@ export = (sequelize, DataTypes) => {
       },
     },
     hooks: {
-      beforeSave(model){
+      beforeSave(model:any){
         if (model.dataValues.password && model.changed('password')) {
           model.dataValues.salt = crypto.randomBytes(16).toString('base64');
           model.dataValues.password = model.hashPassword(model.dataValues.password);
         }
       },
-      beforeValidate(model){
+      beforeValidate(model:any){
         if (model.dataValues.provider === 'local' && model.dataValues.password && model.changed('password')) {
           const result = owasp.test(model.dataValues.password);
           if (result.errors.length) {
@@ -137,17 +138,17 @@ export = (sequelize, DataTypes) => {
     }
   });
   
-  User.prototype.hashPassword = function(password){
+  User.prototype.hashPassword = function(password:string){
     if (this.salt && password) {
       return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64, 'SHA1').toString('base64');
     } else {
       return password;
     }
   };
-  User.prototype.authenticate = function(password){
+  User.prototype.authenticate = function(password:string){
     return (this.password === this.hashPassword(password));
   }
-  User.prototype.findUniqueUsername = function(username, suffix, callback) {
+  User.prototype.findUniqueUsername = function(username:string, suffix:any, callback:Function) {
     let _this = this;
     let possibleUsername = username.toLowerCase() + (suffix || '');
     User.findOne({where: {
